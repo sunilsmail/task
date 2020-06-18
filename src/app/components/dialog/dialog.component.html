@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Change account number</h1>
+<mat-divider></mat-divider>
+<div mat-dialog-content>
+  <p>Please select your debit card number</p>
+  <form>
+    <mat-form-field>
+      <mat-label>Currency</mat-label>
+      <mat-select [(ngModel)]="selectedValue" name="Currency">
+        <mat-option *ngFor="let food of Currency" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field> &nbsp;&nbsp;
+    <mat-form-field>
+      <mat-label>Acc no.</mat-label>
+      <mat-select [(ngModel)]="selectedAcc" name="Acc">
+        <mat-option *ngFor="let food of account" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button  color="primary" (click)="onNoClick(1)">Confirm</button>
+  <button mat-button (click)="onNoClick(2)" class="success" cdkFocusInitial>Cancel</button>
+</div>

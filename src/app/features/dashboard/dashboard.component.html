@@ -1,0 +1,48 @@
+<h1 class="display-4">My Retirement</h1>
+<br>
+<section>
+  <div>
+    <div>
+      <div class="inline">
+        <mat-list role="list" class="left">
+          <mat-list-item role="listitem">Creation date</mat-list-item>
+        </mat-list>
+      </div>
+      <div class="inline">
+        <mat-list role="list">
+          <mat-list-item role="listitem" class="right">
+            <span><button mat-raised-button color="default">Adjust amount</button></span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div>
+      <div class="inline">
+        <mat-list role="list">
+          <mat-list-item role="listitem">Creation date: <span class="label">{{model.createdDate}}</span></mat-list-item>
+          <mat-list-item role="listitem">Change Account Number: <span class="label">{{model.accountNumber}}</span>
+            <mat-icon (click)="open()" *ngIf="loginService.currentUserValue.role === 'admin'" class='icon'>edit</mat-icon>
+          </mat-list-item>
+          <mat-list-item role="listitem">Charge date: <span class="label">{{model.chargeDate}}</span><small>(Next payment date) </small>
+            <mat-icon class='icon'>edit</mat-icon>
+          </mat-list-item>
+          <mat-list-item role="listitem">Status: <span class="label">{{model.status}}</span><button class='icon-button' mat-raised-button color="default">Suspension of
+              investment</button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      <div class="inline">
+        <mat-list role="list">
+          <mat-list-item role="listitem">Investment amount: TWD <span class="label">{{model.invAmount}}</span><small>(per month)</small><button class='icon-button' mat-raised-button
+              color="default">Adjust amount</button></mat-list-item>
+          <mat-list-item role="listitem">Accumulated investment amount: TWD <span class="label">{{model.aInvMoney}}</span></mat-list-item>
+          <mat-list-item role="listitem">Current marget value: <span class="label">{{model.marketVal}}</span><button mat-raised-button
+              color="default" class='icon-button'>Redemption</button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+
+</section>
