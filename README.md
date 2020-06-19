@@ -1,3 +1,8 @@
+## User mock
+mocked users object with two roles
+1. admin(admin can only edit the account number) - username: admin password: admin
+2. user (user cannot edit account number) - username: user password: user
+
 # Task
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
