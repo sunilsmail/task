@@ -7,6 +7,8 @@ pipeline {
         stage('Build') { 
             steps { 
                echo 'building success'
+               nodejs('Node-12.14.1')
+              sh 'npm install'
             }
         }
         stage('Test'){
