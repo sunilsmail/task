@@ -142,3 +142,24 @@ if (validationErrors) {
 } else {
   console.log('API response is valid');
 }
+
+
+const schema = {
+  propertyName: {
+    type: 'string',
+    required: true,
+  },
+};
+
+function validateAgainstSchema(data, schema) {
+  for (const key in schema) {
+    if (schema[key].required && !data.hasOwnProperty(key)) {
+      // Handle missing required property error
+    } else if (typeof data[key] !== schema[key].type) {
+      // Handle type validation error
+    } else if (typeof schema[key] === 'object' && schema[key] !== null) {
+      // Recursive call for nested schemas
+      validateAgainstSchema(data[key], schema[key]);
+    }
+  }
+}
