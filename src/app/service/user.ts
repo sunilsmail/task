@@ -1,4 +1,4 @@
-jiexport interface User {
+8jiexport interface User {
     userName: string;
     password: string;
     role?: string;
@@ -205,4 +205,33 @@ if (validateSchema(dataToValidate, schema)) {
 } else {
   console.log('Data is not valid according to the schema.');
 }
+
+
+
+function getRandomProperty(obj) {
+  const keys = Object.keys(obj);
+  const randomIndex = Math.floor(Math.random() * keys.length);
+  const randomKey = keys[randomIndex];
+  const randomValue = obj[randomKey];
+
+  if (typeof randomValue === 'object' && randomValue !== null) {
+    // If the random value is an object, recursively pick a random property from it.
+    return `${randomKey}.${getRandomProperty(randomValue)}`;
+  } else {
+    // If the random value is not an object, return the random property key.
+    return randomKey;
+  }
+}
+
+const myComplexObject = {
+  prop1: 'value1',
+  prop2: {
+    nestedProp1: 'nestedValue1',
+    nestedProp2: 'nestedValue2',
+  },
+  prop3: 'value3',
+};
+
+const randomProperty = getRandomProperty(myComplexObject);
+console.log(randomProperty); // This will log a random property path from the complex object.
 
