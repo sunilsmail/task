@@ -1,4 +1,4 @@
-export interface User {
+jiexport interface User {
     userName: string;
     password: string;
     role?: string;
@@ -163,3 +163,46 @@ function validateAgainstSchema(data, schema) {
     }
   }
 }
+
+
+function validateSchema(data, schema) {
+  for (const key in schema) {
+    if (typeof schema[key] === 'object') {
+      // If the schema defines a nested object, recursively validate it.
+      if (!validateSchema(data[key], schema[key])) {
+        return false;
+      }
+    } else {
+      // If the schema defines a type, check if the data matches the type.
+      if (typeof data[key] !== schema[key]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+const dataToValidate = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Exampleville'
+  }
+};
+
+const schema = {
+  name: 'string',
+  age: 'number',
+  address: {
+    street: 'string',
+    city: 'string'
+  }
+};
+
+if (validateSchema(dataToValidate, schema)) {
+  console.log('Data is valid according to the schema.');
+} else {
+  console.log('Data is not valid according to the schema.');
+}
+
