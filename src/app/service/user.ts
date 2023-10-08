@@ -235,3 +235,40 @@ const myComplexObject = {
 const randomProperty = getRandomProperty(myComplexObject);
 console.log(randomProperty); // This will log a random property path from the complex object.
 
+
+function getRandomProperty(obj) {
+  const keys = Object.keys(obj); // Get all the keys from the current object
+
+  // Filter out keys that have nested objects (if you want to exclude nested objects)
+  const nonObjectKeys = keys.filter(key => typeof obj[key] !== 'object');
+
+  if (nonObjectKeys.length > 0) {
+    // If there are non-object keys in the current object, pick a random one
+    const randomIndex = Math.floor(Math.random() * nonObjectKeys.length);
+    const randomKey = nonObjectKeys[randomIndex];
+    return randomKey;
+  } else {
+    // If there are no non-object keys, recursively pick a random property from one of the nested objects
+    const randomNestedObjectKey = keys[Math.floor(Math.random() * keys.length)];
+    return getRandomProperty(obj[randomNestedObjectKey]);
+  }
+}
+
+const complexObject = {
+  prop1: 'value1',
+  prop2: {
+    nestedProp1: 'nestedValue1',
+    nestedProp2: 'nestedValue2',
+  },
+  prop3: {
+    nestedProp3: 'nestedValue3',
+    nestedProp4: {
+      deepProp1: 'deepValue1',
+      deepProp2: 'deepValue2',
+    },
+  },
+};
+
+const randomProperty = getRandomProperty(complexObject);
+console.log(randomProperty); // This will log a random property name from the complex object.
+
