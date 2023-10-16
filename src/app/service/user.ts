@@ -272,3 +272,36 @@ const complexObject = {
 const randomProperty = getRandomProperty(complexObject);
 console.log(randomProperty); // This will log a random property name from the complex object.
 
+
+function randomNullify(obj, probability) {
+    for (const key in obj) {
+        if (Math.random() < probability) {
+            obj[key] = null;
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            randomNullify(obj[key], probability);
+        }
+    }
+}
+
+// Example usage:
+const complexObject = {
+    prop1: {
+        prop2: {
+            prop3: 'value1',
+            prop4: {
+                prop5: 'value2',
+            },
+        },
+        prop6: 'value3',
+    },
+    prop7: 'value4',
+};
+
+// Set a probability (e.g., 0.2 for 20% chance of setting to null)
+const probability = 0.2;
+
+randomNullify(complexObject, probability);
+
+console.log(complexObject);
+
+
