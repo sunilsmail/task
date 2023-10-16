@@ -66,3 +66,49 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
   }
 }
+
+maximum depth within the object and provide the field names to reach that depth
+
+
+function getMaxObjectDepthWithFieldNames(obj) {
+  let maxDepth = 0;
+  let maxFieldNames = [];
+
+  function findMaxDepth(currentObj, depth, fieldNames) {
+    if (typeof currentObj !== 'object' || currentObj === null) {
+      if (depth > maxDepth) {
+        maxDepth = depth;
+        maxFieldNames = [...fieldNames];
+      }
+      return;
+    }
+
+    for (const key in currentObj) {
+      if (currentObj.hasOwnProperty(key)) {
+        fieldNames.push(key);
+        findMaxDepth(currentObj[key], depth + 1, fieldNames);
+        fieldNames.pop();
+      }
+    }
+  }
+
+  findMaxDepth(obj, 0, []);
+
+  return { maxDepth, maxFieldNames };
+}
+
+const myObject = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: {
+        f: 3
+      }
+    }
+  }
+};
+
+const result = getMaxObjectDepthWithFieldNames(myObject);
+console.log(`Max Depth: ${result.maxDepth}`);
+console.log("Field Names: " + result.maxFieldNames.join(" > "));
