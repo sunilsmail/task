@@ -305,3 +305,37 @@ randomNullify(complexObject, probability);
 console.log(complexObject);
 
 
+function updateRandomValueToNull(obj) {
+  // Check if the given object is an array
+  if (Array.isArray(obj)) {
+    // If it's an array, choose a random index and update the value to null
+    const randomIndex = Math.floor(Math.random() * obj.length);
+    obj[randomIndex] = null;
+  } else if (typeof obj === 'object' && obj !== null) {
+    // If it's an object, iterate through its properties
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        // Recursively call the function for nested objects
+        updateRandomValueToNull(obj[key]);
+      }
+    }
+  }
+}
+
+// Example usage:
+const complexObject = {
+  a: {
+    b: [1, 2, 3],
+    c: {
+      d: {
+        e: 42,
+      },
+    },
+  },
+  f: [4, 5, 6],
+};
+
+updateRandomValueToNull(complexObject);
+console.log(complexObject);
+
+
