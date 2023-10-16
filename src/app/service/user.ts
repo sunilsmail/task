@@ -1,4 +1,4 @@
-8jiexport interface User {
+export interface User {
     userName: string;
     password: string;
     role?: string;
@@ -336,6 +336,37 @@ const complexObject = {
 };
 
 updateRandomValueToNull(complexObject);
+console.log(complexObject);
+
+
+function randomlySetToNull(obj) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (typeof obj[key] === 'object') {
+        randomlySetToNull(obj[key]); // Recurse into nested objects
+      } else if (Math.random() < 0.2) { // Adjust the probability as needed
+        obj[key] = null;
+      }
+    }
+  }
+}
+
+const complexObject = {
+  a: {
+    b: {
+      c: "Some value",
+      d: {
+        e: "Another value",
+        f: {
+          g: "Yet another value",
+        }
+      }
+    }
+  }
+};
+
+randomlySetToNull(complexObject);
+
 console.log(complexObject);
 
 
