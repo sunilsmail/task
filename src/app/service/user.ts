@@ -407,3 +407,39 @@ randomNullUpdate(complexObject);
 console.log(complexObject);
 
 
+function getObjectDepthWithFieldNames(obj, currentDepth = 1, fieldNames = []) {
+  if (typeof obj !== 'object' || obj === null) {
+    // If it's not an object, return the current depth and field names
+    return { depth: currentDepth, fieldNames };
+  }
+
+  let maxDepth = currentDepth;
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      fieldNames.push(key);
+      const childDepth = getObjectDepthWithFieldNames(obj[key], currentDepth + 1, fieldNames);
+      maxDepth = Math.max(maxDepth, childDepth.depth);
+      fieldNames.pop(); // Remove the last added field name
+    }
+  }
+
+  return { depth: maxDepth, fieldNames };
+}
+
+const myObject = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 3
+    }
+  }
+};
+
+const result = getObjectDepthWithFieldNames(myObject);
+console.log(`Depth: ${result.depth}`);
+console.log("Field Names: " + result.fieldNames.join(" > "));
+
+
+
