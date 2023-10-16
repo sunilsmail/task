@@ -370,3 +370,40 @@ randomlySetToNull(complexObject);
 console.log(complexObject);
 
 
+function randomNullUpdate(obj) {
+  // Check if obj is an object
+  if (typeof obj === 'object' && obj !== null) {
+    // If it's an array, randomly select an index to update
+    if (Array.isArray(obj)) {
+      const randomIndex = Math.floor(Math.random() * obj.length);
+      obj[randomIndex] = null;
+    } else {
+      // If it's an object, randomly select a property to update
+      const keys = Object.keys(obj);
+      const randomKey = keys[Math.floor(Math.random() * keys.length)];
+      obj[randomKey] = null;
+    }
+
+    // Recursively update nested objects and arrays
+    for (const key in obj) {
+      randomNullUpdate(obj[key]);
+    }
+  }
+}
+
+// Example usage
+const complexObject = {
+  prop1: {
+    nested1: [1, 2, 3],
+    nested2: {
+      value: 'abc',
+      nested3: [4, 5, 6]
+    }
+  },
+  prop2: [7, 8, 9]
+};
+
+randomNullUpdate(complexObject);
+console.log(complexObject);
+
+
