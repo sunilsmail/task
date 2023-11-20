@@ -1,0 +1,26 @@
+function checkBracesValidity(input) {
+  const stack = [];
+  const openingBraces = ['(', '{', '['];
+  const closingBraces = [')', '}', ']'];
+
+  for (let char of input) {
+    if (openingBraces.includes(char)) {
+      stack.push(char);
+    } else if (closingBraces.includes(char)) {
+      const lastOpening = stack.pop();
+
+      if (
+        !lastOpening ||
+        openingBraces.indexOf(lastOpening) !== closingBraces.indexOf(char)
+      ) {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+}
+
+// Example usage:
+const isValid = checkBracesValidity("function example() { if(true) { return 'Valid'; } }");
+console.log(isValid); // Output: true
